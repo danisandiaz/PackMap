@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PackMapApplication {
 
 	public static void main(String[] args) {
+		//migrations//
 		SpringApplication.run(PackMapApplication.class, args);
 	}
 
