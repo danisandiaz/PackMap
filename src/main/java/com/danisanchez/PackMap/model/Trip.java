@@ -28,7 +28,7 @@ public class Trip {
 
     private String transportation;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "trip_activities",
             joinColumns = { @JoinColumn(name = "trip_id") },
             inverseJoinColumns = { @JoinColumn(name = "activity_id") })
@@ -95,5 +95,17 @@ public class Trip {
 
     public void setTransportation(String transportation) {
         this.transportation = transportation;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
+    }
+
+    public void addActivity(Activity activity) {
+        this.activities.add(activity);
     }
 }

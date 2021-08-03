@@ -39,7 +39,11 @@ public class TripController {
     }
     @PostMapping("/trips")
     public Trip createTrip(@Valid @RequestBody Trip trip) {
+//        String[] activities  = trip.activity;
+//        for (String i : trip.activity) {
+//        }
         return tripRepository.save(trip);
+
     }
 
     @PutMapping("/trips/{id}")

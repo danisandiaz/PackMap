@@ -17,6 +17,12 @@ public class Activity {
     @ManyToMany(mappedBy = "activities")
     public Set<Trip> trips = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "activity_items",
+            joinColumns = { @JoinColumn(name = "activity_id") },
+            inverseJoinColumns = { @JoinColumn(name = "item_id") })
+    private Set<Item> items = new HashSet<>();
+
     public Activity() {
     }
 

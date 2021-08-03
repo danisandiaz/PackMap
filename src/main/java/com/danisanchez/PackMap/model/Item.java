@@ -1,6 +1,8 @@
 package com.danisanchez.PackMap.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Item {
@@ -12,6 +14,11 @@ public class Item {
     private String name;
 
     private String type;
+
+    @ManyToMany(mappedBy = "items")
+    public Set<Activity> activities = new HashSet<>();
+
+
 
     public Item() {
     }
