@@ -52,6 +52,7 @@ public class TripController {
         trip.setStartdate(tripDetails.getStartdate());
         trip.setEnddate(tripDetails.getEnddate());
         trip.setLocation(tripDetails.getLocation());
+        trip.setTransportation(tripDetails.getTransportation());
 
         final Trip updatedTrip = tripRepository.save(trip);
         return ResponseEntity.ok(updatedTrip);

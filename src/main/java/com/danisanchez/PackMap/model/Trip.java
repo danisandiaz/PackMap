@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-//@Table(name = "trip")
 public class Trip {
 
     @Id
@@ -21,23 +22,32 @@ public class Trip {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private java.util.Date startdate;
 
-
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private java.util.Date enddate;
+
+    private String transportation;
+
+    @ManyToMany
+    @JoinTable(name = "trip_activities",
+            joinColumns = { @JoinColumn(name = "trip_id") },
+            inverseJoinColumns = { @JoinColumn(name = "activity_id") })
+    private Set<Activity> activities = new HashSet<>();
 
 
     public Trip() {
     }
 
-    public Trip(long id, String name, Date startdate, Date enddate, String location) {
+    public Trip(long id, String name, Date startdate, Date enddate, String location, String transportation) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.startdate = startdate;
         this.enddate = enddate;
+        this.transportation = transportation;
 
     }
+
 
     public Long getId() {
         return id;
@@ -77,5 +87,13 @@ public class Trip {
 
     public void setEnddate(Date enddate) {
         this.enddate = enddate;
+    }
+
+    public String getTransportation() {
+        return transportation;
+    }
+
+    public void setTransportation(String transportation) {
+        this.transportation = transportation;
     }
 }

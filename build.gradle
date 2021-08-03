@@ -22,6 +22,8 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 //	implementation 'javax.validation:validation-api:1.0.0.GA'
+	implementation 'org.hibernate:hibernate-entitymanager:4.1.7.Final'
+
 
 //	compile 'org.flywaydb:flyway-core:7.12.0'
 }
