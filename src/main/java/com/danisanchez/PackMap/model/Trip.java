@@ -29,6 +29,9 @@ public class Trip {
 
     private String transportation;
 
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.REMOVE)
+    private Set<Item> items;
+
 
     public Trip() {
     }

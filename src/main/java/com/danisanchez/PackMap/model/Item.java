@@ -1,5 +1,8 @@
 package com.danisanchez.PackMap.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +22,7 @@ public class Item {
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "trip_id", referencedColumnName="id")
     private Trip trip;
 
