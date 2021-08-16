@@ -6,12 +6,15 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.danisanchez.PackMap.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.danisanchez.PackMap.model.Trip;
 import com.danisanchez.PackMap.repository.TripRepository;
+import com.danisanchez.PackMap.repository.TravelerRepository;
+
 import com.danisanchez.PackMap.exception.ResourceNotFoundException;
 
 @CrossOrigin
@@ -19,6 +22,9 @@ import com.danisanchez.PackMap.exception.ResourceNotFoundException;
 public class TripController {
     @Autowired
     private TripRepository tripRepository;
+
+    @Autowired
+    private TravelerRepository travelerRepository;
 
     @GetMapping("/trips")
     public List<Trip> getAllTrips() {
@@ -34,11 +40,23 @@ public class TripController {
         return ResponseEntity.ok().body(trip);
     }
 
-    @CrossOrigin
-    @PostMapping("/trips")
-    public Trip createTrip(@Valid @RequestBody Trip trip) {
-        return tripRepository.save(trip);
+    @GetMapping("/traveler/{travelerId}/trip")
+    public List<Trip> getAllTripsByTravelerId(@PathVariable Long travelerId){
+        List<Trip> out = tripRepository.findByTravelerId(travelerId);
+        return out;
     }
+
+    @CrossOrigin
+    @PostMapping("/traveler/{travelerId}/trip")
+    public Trip createTrip(@PathVariable (value = "travelerId") Long travelerId,
+                           @Valid @RequestBody Trip trip) {
+        return travelerRepository.findById(travelerId).map(traveler -> {
+            trip.setTraveler(traveler);
+            return tripRepository.save(trip);
+        }).orElseThrow(() -> new ResourceNotFoundException("TravelerId " + travelerId + " not found"));
+    }
+
+
 
     @PutMapping("/trip/{id}")
     public ResponseEntity<Trip> updateTrip(@PathVariable(value = "id") Long tripId,

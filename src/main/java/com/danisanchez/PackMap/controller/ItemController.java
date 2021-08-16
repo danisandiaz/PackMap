@@ -37,7 +37,7 @@ public class ItemController {
         return out;
     }
 
-
+    @CrossOrigin
     @PostMapping("/trips/{tripId}/item")
     public Item createItem(@PathVariable (value = "tripId") Long tripId,
                            @Valid @RequestBody Item item) {

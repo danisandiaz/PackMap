@@ -102,15 +102,11 @@ public class Trip {
         this.transportation = transportation;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Item> items) {
-//        this.items = items;
-//    }
-//
-//    public void addItem(Item item) {
-//        this.items.add(item);
-//    }
+    public Traveler getTraveler() {
+        return traveler;
+    }
+
+    public void setTraveler(Traveler traveler) {
+        this.traveler = traveler;
+    }
 }

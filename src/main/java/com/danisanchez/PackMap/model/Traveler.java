@@ -1,5 +1,7 @@
 package com.danisanchez.PackMap.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -17,6 +19,7 @@ public class Traveler {
 
 
     @OneToMany(mappedBy = "traveler", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Set<Trip> trips;
 
 
@@ -51,5 +54,13 @@ public class Traveler {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(Set<Trip> trips) {
+        this.trips = trips;
     }
 }
