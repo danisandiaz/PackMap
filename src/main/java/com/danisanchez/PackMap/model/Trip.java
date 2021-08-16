@@ -1,6 +1,8 @@
 package com.danisanchez.PackMap.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,6 +33,11 @@ public class Trip {
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.REMOVE)
     private Set<Item> items;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "traveler_id", referencedColumnName="id")
+    private Traveler traveler;
 
 
     public Trip() {
