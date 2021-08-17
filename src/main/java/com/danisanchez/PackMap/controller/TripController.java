@@ -40,6 +40,7 @@ public class TripController {
         return ResponseEntity.ok().body(trip);
     }
 
+    @CrossOrigin
     @GetMapping("/traveler/{travelerId}/trip")
     public List<Trip> getAllTripsByTravelerId(@PathVariable Long travelerId){
         List<Trip> out = tripRepository.findByTravelerId(travelerId);
